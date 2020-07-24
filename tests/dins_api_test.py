@@ -1,4 +1,5 @@
 import requests
+import pytest
 from itertools import groupby
 
 url = 'https://jsonplaceholder.typicode.com/posts/'
@@ -13,7 +14,7 @@ def get_json():
     json_file_from_site = res.json()
     return json_file_from_site
 
-
+@pytest.mark.get
 def test_get_count_the_number_of_users():   # check that there are 10 users
     json_file_from_site = get_json()
 
@@ -22,7 +23,7 @@ def test_get_count_the_number_of_users():   # check that there are 10 users
 
     assert len(sorted_user_id_list) == 10
 
-
+@pytest.mark.get
 def test_get_count_the_number_of_entities():    # check that there are only 100 records
     json_file_from_site = get_json()
 
@@ -30,7 +31,7 @@ def test_get_count_the_number_of_entities():    # check that there are only 100 
 
     assert len(number_of_entities) == 100
 
-
+@pytest.mark.get
 def test_get_count_the_number_of_entities_per_user():   # check the number of records per user and that each record can be obtained separately
     json_file_from_site = get_json()
 
@@ -45,7 +46,7 @@ def test_get_count_the_number_of_entities_per_user():   # check the number of re
             response = requests.get(url + '?userId=' + str(userId) + '&id=' + str(entity_id))
             assert response.status_code == 200
 
-
+@pytest.mark.post
 def test_post_new_entry():  # check the status code after saving a new entry
     data = {'userId': '1', 'id': '101', 'title': 'test_title', 'body': 'test_body'}
 
