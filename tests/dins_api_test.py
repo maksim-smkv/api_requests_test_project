@@ -47,10 +47,10 @@ def test_get_count_the_number_of_entities_per_user():   # check the number of re
             assert response.status_code == 200
 
 @pytest.mark.post
-def test_post_new_entry():  # check the status code after saving a new entry
-    data = {'userId': '1', 'id': '101', 'title': 'test_title', 'body': 'test_body'}
-
-    new_entry = requests.post(url, data=data)
+def test_post_new_entry(data_for_new_entry):  # check the status code after saving a new entry
+    new_entry = requests.post(url, data=data_for_new_entry)
 
     assert new_entry.status_code == 201
+
+
 
