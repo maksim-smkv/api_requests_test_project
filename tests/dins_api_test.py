@@ -4,16 +4,6 @@ from itertools import groupby
 
 url = 'https://jsonplaceholder.typicode.com/posts/'
 
-
-def get_json():
-    res = requests.get(url)
-    if res:
-        print("Response OK - resource is available.")
-    else:
-        print("Response failed. Code:", res.status_code)
-    json_file_from_site = res.json()
-    return json_file_from_site
-
 @pytest.mark.get
 def test_get_count_the_number_of_users():   # check that there are 10 users
     json_file_from_site = get_json()
@@ -51,6 +41,15 @@ def test_post_new_entry(data_for_new_entry):  # check the status code after savi
     new_entry = requests.post(url, data=data_for_new_entry)
 
     assert new_entry.status_code == 201
+
+def get_json():
+    res = requests.get(url)
+    if res:
+        print("Response OK - resource is available.")
+    else:
+        print("Response failed. Code:", res.status_code)
+    json_file_from_site = res.json()
+    return json_file_from_site
 
 
 
